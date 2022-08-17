@@ -16,9 +16,11 @@ public class Burnable : MonoBehaviour
     Color baseColor;
 
 
-    Collider2D collider;
+new     Collider2D collider;
+    SpreadArea tempDiffArea;
     float temperature;
-    bool burnt;
+    public bool Burnt{get; private set;}
+    
     
     SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
@@ -28,22 +30,29 @@ public class Burnable : MonoBehaviour
         collider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         baseColor = spriteRenderer.color;
+        tempDiffArea = GetComponentInChildren<SpreadArea>();
+        
     }
 
     public void ChangeTemperature(float amount)
     {
-        if(!burnt)
+        if(!Burnt)
         {
             temperature+=amount;
             temperature = Mathf.Clamp(temperature, 0, float.MaxValue);
+            
             //Debug.Log($"Temperature changed to {temperature}");
             if(temperature >= burntTemperature)
             {
                 spriteRenderer.color= burntColor;
-                burnt=true;
+                Burnt=true;
             }
             else
             {
+                if(temperature > burningTemperature )
+                {
+                    tempDiffArea.AddHeat(amount);
+                }
                 spriteRenderer.color = CalculateColor(temperature);
             }
         }
@@ -73,6 +82,6 @@ public class Burnable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }
