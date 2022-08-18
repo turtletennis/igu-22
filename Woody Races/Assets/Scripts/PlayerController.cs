@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log(rigidbody.velocity);
+        //Debug.Log(rigidbody.velocity);
     }
 
     // Update is called once per frame
