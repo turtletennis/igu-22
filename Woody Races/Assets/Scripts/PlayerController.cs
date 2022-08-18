@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxSpeed = 25;
     [SerializeField] float turnPower = 50;
     [SerializeField] float steeringDeadZone = 0.25f;
+    [SerializeField] float directionCheckDelay = 0.5f;
+    float directionLastCheckedAt;
+    float currentBearing;
 
-    
+    Vector3 trackCentre;
 
     float speed;
     Vector2 inputDirection;
@@ -19,50 +22,31 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        CheckpointManager checkpointManager = FindObjectOfType<CheckpointManager>();
+        trackCentre = checkpointManager.transform.position;
+        UpdateBearing();
+    }
+
+    private void UpdateBearing()
+    {
+        var deltaPos = transform.position - trackCentre;
+        float newBearing = Mathf.Atan2(deltaPos.z,deltaPos.x) * 180f / Mathf.PI + 180;
+        //Debug.Log(currentBearing);
+        float diff = newBearing - currentBearing;
+        if(diff < -180) diff+=360;
+        if(diff < 0)
+        {
+            Debug.Log("Going the wrong way!");
+        }
+        currentBearing = newBearing;
+        directionLastCheckedAt = Time.time;
     }
 
     private void Update() {
         //Debug.Log(rigidbody.velocity);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //Move();
-    }
-
-    void Move()
-    {
-        //rigidbody.MoveRotation(Quaternion.Euler(0,turnPower * inputDirection.x * Time.deltaTime,0));
-        if(inputDirection.x > steeringDeadZone || inputDirection.x < -steeringDeadZone)
+        if(Time.time > directionLastCheckedAt + directionCheckDelay)
         {
-            transform.rotation *= Quaternion.AngleAxis(turnPower * inputDirection.x * Time.deltaTime,transform.up);
-            
-            var up = transform.up;
-            rigidbody.velocity = Quaternion.Euler(up.x,up.y,up.z) * rigidbody.velocity;
-
-        }
-        
-        Vector3 newV = transform.forward * acceleration * Time.deltaTime * inputDirection.y;
-        rigidbody.velocity += newV;
-        
-    }
-
-    void MoveKinematic()
-    {
-        
-    }
-
-    void MoveWithForces()
-    {
-        if(inputDirection.x > steeringDeadZone || inputDirection.x < -steeringDeadZone)
-        {
-            rigidbody.AddTorque(transform.up * turnPower * inputDirection.x);
-        }
-        //+ve acceleration and < max speed or -ve acceleration and > -maxSpeed
-        if(rigidbody.velocity.magnitude * Mathf.Sign(inputDirection.y) < maxSpeed )
-        {
-            rigidbody.AddForce(transform.forward * acceleration * inputDirection.y);
+            UpdateBearing();
         }
     }
 
