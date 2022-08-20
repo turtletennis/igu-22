@@ -6,11 +6,14 @@ public class Racer : MonoBehaviour
 {
     // Start is called before the first frame update
     CheckpointManager checkpointManager;
+    SimpleCarController carController;
     public int racerIndex;
     int currentCheckpoint;
+    
     void Start()
     {
         checkpointManager = FindObjectOfType<CheckpointManager>();
+        carController = GetComponent<SimpleCarController>();
         Debug.Log($"Racer start");
     }
 
@@ -29,7 +32,18 @@ public class Racer : MonoBehaviour
         }
         else
         {
-            Debug.Log(other.gameObject.name);
+            var pickup = other.GetComponent<FuelPickup>();
+            if(pickup!=null)
+            {
+                carController.AddFuel(pickup.Value);
+                StartCoroutine(pickup.Collect());
+            }
+            else
+            {
+                Debug.Log(other.gameObject.name);
+            }
         }
     }
+
+    
 }
