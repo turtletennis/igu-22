@@ -21,6 +21,12 @@ public class SimpleCarController : MonoBehaviour {
         hudManager = FindObjectOfType<HudManager>();
 
     }
+
+    public void SetInputDirection(Vector2 input)
+    {
+        inputDirection = input;
+    }
+
     public void FixedUpdate()
     {
         float motor = maxMotorTorque * inputDirection.y;
@@ -47,11 +53,11 @@ public class SimpleCarController : MonoBehaviour {
             }
         }
     }
-    void OnMove(InputValue value)
-    {
-        inputDirection = value.Get<Vector2>();
-        //Debug.Log(inputDirection);
-    }
+    // void OnMove(InputValue value)
+    // {
+    //     inputDirection = value.Get<Vector2>();
+    //     //Debug.Log(inputDirection);
+    // }
 
     public void AddFuel(float value)
     {

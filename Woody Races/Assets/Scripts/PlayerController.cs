@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float turnPower = 50;
     [SerializeField] float steeringDeadZone = 0.25f;
     [SerializeField] float directionCheckDelay = 0.5f;
+    SimpleCarController simpleCarController;
     float directionLastCheckedAt;
     float currentBearing;
 
@@ -17,11 +18,12 @@ public class PlayerController : MonoBehaviour
 
     float speed;
     Vector2 inputDirection;
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        simpleCarController = GetComponent<SimpleCarController>();
         CheckpointManager checkpointManager = FindObjectOfType<CheckpointManager>();
         trackCentre = checkpointManager.transform.position;
         UpdateBearing();
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour
         directionLastCheckedAt = Time.time;
     }
 
+
+
     private void Update() {
         //Debug.Log(rigidbody.velocity);
         if(Time.time > directionLastCheckedAt + directionCheckDelay)
@@ -52,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        inputDirection = value.Get<Vector2>();
+        simpleCarController.SetInputDirection(value.Get<Vector2>());
         //Debug.Log(inputDirection);
     }
 }
