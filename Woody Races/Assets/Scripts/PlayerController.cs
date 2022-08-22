@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         if(diff < -180) diff+=360;
         if(diff < 0)
         {
-            Debug.Log("Going the wrong way!");
+            //Debug.Log("Going the wrong way!");
         }
         currentBearing = newBearing;
         directionLastCheckedAt = Time.time;

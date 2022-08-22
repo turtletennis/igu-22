@@ -13,8 +13,10 @@ public class SimpleCarController : MonoBehaviour {
     [SerializeField] float fuelWarningLevel = 2;
     [SerializeField] float fuelDrainRate = 0.5f;
     [SerializeField] float minimumSpeedFactor = 0.05f;
+    [SerializeField] bool isPlayer;
     public float fuelRemaining;
     HudManager hudManager;
+    
         
     private void Start() {
         fuelRemaining = startingFuel;
@@ -71,7 +73,10 @@ public class SimpleCarController : MonoBehaviour {
 
     void UpdateHud()
     {
-        hudManager.UpdateFuelRemaining(fuelRemaining/maxFuel);
+        if(isPlayer)
+        {
+            hudManager.UpdateFuelRemaining(fuelRemaining / maxFuel);
+        }
     }
 
 }

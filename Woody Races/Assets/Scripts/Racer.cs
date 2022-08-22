@@ -39,12 +39,16 @@ public class Racer : MonoBehaviour
             {
                 carController.AddFuel(pickup.Value);
                 StartCoroutine(pickup.Collect());
-                cpuController?.PickupCollected(other.transform);
+                //cpuController?.TargetReached(other.transform);
             }
             else
             {
                 Debug.Log(other.gameObject.name);
             }
+        }
+        if(other.gameObject.tag=="cpuTarget")
+        {
+            cpuController?.TargetReached(other.transform);
         }
     }
 

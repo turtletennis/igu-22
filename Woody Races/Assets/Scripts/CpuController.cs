@@ -5,11 +5,28 @@ using UnityEngine;
 public class CpuController : MonoBehaviour
 {
     SimpleCarController simpleCarController;
+    CpuTargetsManager cpuTargetsManager;
     public List<Transform> trackTargets;
     public int targetIndex;
 
+    [Header("raycasting")]
+    [SerializeField] float collisionAvoidDistance = 5f;
+    [SerializeField] float reverseTimeForAvoiding = 1f;
+    
+    [SerializeField] Transform rayCastPosition;
+    [Header("debugging")]
+    [SerializeField] bool debugRay;
+    public bool reversing;
+
     void Start()
     {
+        if(rayCastPosition == null)
+        {
+            Debug.Log("Missing raycast position");
+            rayCastPosition = transform;
+        }
+        cpuTargetsManager = FindObjectOfType<CpuTargetsManager>();
+        trackTargets = cpuTargetsManager.TrackWayPoints;
         simpleCarController = GetComponent<SimpleCarController>();
 
     }
@@ -25,30 +42,77 @@ public class CpuController : MonoBehaviour
         
         float accel = dot > 0 ? 1 : -1;
         float turn = angle > 0 ? 1 : -1;
-        turn *= accel; //if we're going backwards need to reverse the steering
+        
         int layerMask = 1 << 6; // pickups layer
         RaycastHit hit;
-        if(Physics.Raycast(transform.position,transform.forward,out hit, float.MaxValue,layerMask))
+        if(Physics.Raycast(rayCastPosition.position,rayCastPosition.forward,out hit, float.MaxValue,layerMask))
         {
             turn = 0;
             
         }
+
+        layerMask = 1 << 7; //obstacles layer
+        if(debugRay) Debug.DrawRay(rayCastPosition.position,rayCastPosition.forward*5,Color.red,0.1f);
+        if(Physics.Raycast(rayCastPosition.position,rayCastPosition.forward,out hit, collisionAvoidDistance,layerMask))
+        {
+            if(!reversing)
+            {
+                Debug.Log("reversing to avoid obstacle");
+                StartCoroutine(Reverse(reverseTimeForAvoiding));
+            }
+        }
+        else
+        {
+            layerMask = 1 << 6;
+            layerMask = ~ layerMask; //not pickups layer
+            if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right,out hit, collisionAvoidDistance,layerMask))
+            {
+                turn = -1;
+            }
+            else if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right * -1,out hit, collisionAvoidDistance,layerMask))
+            {
+                turn = 1;
+            }
+        }
+
+        if(reversing) 
+        {
+            accel = -1;
+            if(Time.time % 10 <1)
+            {
+            Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
+            }
+        }
+        turn *= accel; //if we're going backwards need to reverse the steering
+
         simpleCarController.SetInputDirection(new Vector2(turn,accel));
-        Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
+        if(Time.time % 10 <1)
+        {
+        //Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
+        }
     }
 
-    public void PickupCollected(Transform location)
+    IEnumerator Reverse(float time)
+    {
+        Debug.Log("Reversing");
+        reversing = true;
+        yield return new WaitForSeconds(time);
+        reversing = false;
+
+    }
+
+    public void TargetReached(Transform location)
     {
         if(trackTargets[targetIndex].gameObject == location.gameObject)
         {
             targetIndex++;
             if(targetIndex >=trackTargets.Count) targetIndex = 0;
-            Debug.Log("Pickup collected, matched. Next is " + trackTargets[targetIndex].gameObject.name);
+            Debug.Log("Target reached, matched. Next is " + trackTargets[targetIndex].gameObject.name);
             
         }
         else
         {
-            Debug.Log($"Pickup collected, not matched {trackTargets[targetIndex].gameObject.name}!={location.gameObject.name}");
+            Debug.Log($"Target reached, not matched {trackTargets[targetIndex].gameObject.name}!={location.gameObject.name}");
         }
     }
 }

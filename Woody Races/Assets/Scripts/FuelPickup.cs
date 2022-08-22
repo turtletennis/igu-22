@@ -27,7 +27,7 @@ public class FuelPickup : MonoBehaviour
 
     public IEnumerator Collect()
     {
-        Debug.Log("disabling");
+        //Debug.Log("disabling");
         enabled = false;
         foreach(var child in GetComponentsInChildren<MeshRenderer>())
         {
@@ -38,7 +38,7 @@ public class FuelPickup : MonoBehaviour
         {
             child.enabled = true;
         }
-        Debug.Log("enabling");
+        //Debug.Log("enabling");
         enabled = true;
     }
     

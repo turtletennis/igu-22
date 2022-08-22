@@ -25,9 +25,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574152313251929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57, y: -0.2, z: 1}
+  m_LocalPosition: {x: -0.57, y: -0.24800004, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4948574153782590367}
   m_Father: {fileID: 4948574152607014493}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,7 +60,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &4948574152419084655
 GameObject:
@@ -112,7 +113,7 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &4948574152419084645
@@ -190,6 +191,7 @@ MonoBehaviour:
   fuelWarningLevel: 30
   fuelDrainRate: 0.05
   minimumSpeedFactor: 0.1
+  isPlayer: 0
   fuelRemaining: 0
 --- !u!114 &4948574152419084640
 MonoBehaviour:
@@ -229,12 +231,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574152558871130}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.714, y: -0.475, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.14398926, y: -0.125, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.20000002, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 4948574152607014493}
-  m_RootOrder: 6
+  m_Father: {fileID: 4948574152746924003}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &4948574152558871135
 MeshFilter:
@@ -316,10 +318,6 @@ Transform:
   - {fileID: 4948574152832596118}
   - {fileID: 4948574152746924003}
   - {fileID: 4948574154046068210}
-  - {fileID: 4948574153782590367}
-  - {fileID: 4948574153860998566}
-  - {fileID: 4948574152558871133}
-  - {fileID: 4948574153796679507}
   m_Father: {fileID: 4948574152419084642}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -348,9 +346,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574152746924000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57, y: -0.2, z: -1}
+  m_LocalPosition: {x: -0.57, y: -0.24800004, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4948574152558871133}
   m_Father: {fileID: 4948574152607014493}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -382,7 +381,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &4948574152832596119
 GameObject:
@@ -409,9 +408,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574152832596119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: -0.2, z: 1}
+  m_LocalPosition: {x: 0.57, y: -0.24800004, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4948574153860998566}
   m_Father: {fileID: 4948574152607014493}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -443,7 +443,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &4948574153136018191
 GameObject:
@@ -595,12 +595,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574153782590364}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.714, y: -0.475, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.14398926, y: -0.125, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.20000002, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 4948574152607014493}
-  m_RootOrder: 4
+  m_Father: {fileID: 4948574152313251928}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &4948574153782590353
 MeshFilter:
@@ -676,12 +676,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574153796679504}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.714, y: -0.475, z: -1}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.14398926, y: -0.125, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.20000002, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 4948574152607014493}
-  m_RootOrder: 7
+  m_Father: {fileID: 4948574154046068210}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &4948574153796679509
 MeshFilter:
@@ -757,12 +757,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574153860998567}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.714, y: -0.475, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.5}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.14398926, y: -0.125, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.20000002, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 4948574152607014493}
-  m_RootOrder: 5
+  m_Father: {fileID: 4948574152832596118}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &4948574153860998584
 MeshFilter:
@@ -838,9 +838,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4948574154046068208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57, y: -0.2, z: -1}
+  m_LocalPosition: {x: 0.57, y: -0.24800004, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4948574153796679507}
   m_Father: {fileID: 4948574152607014493}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -872,5 +873,5 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_Enabled: 1
