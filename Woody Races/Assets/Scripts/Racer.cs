@@ -30,7 +30,7 @@ public class Racer : MonoBehaviour
         if(checkpoint != null)
         {
             Debug.Log("Checkpoint hit!");
-            checkpointManager.CheckpointHit(racerIndex,checkpoint);
+            checkpointManager.CheckpointHit(racerIndex,checkpoint,cpuController==null);
         }
         else
         {

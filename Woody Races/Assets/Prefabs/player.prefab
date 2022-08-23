@@ -190,7 +190,7 @@ MonoBehaviour:
   maxFuel: 100
   fuelWarningLevel: 30
   fuelDrainRate: 0.05
-  minimumSpeedFactor: 0.1
+  minimumSpeedFactor: 0.5
   isPlayer: 0
   fuelRemaining: 0
 --- !u!114 &4948574152419084640

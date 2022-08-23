@@ -16,6 +16,7 @@ public class CpuController : MonoBehaviour
     [SerializeField] Transform rayCastPosition;
     [Header("debugging")]
     [SerializeField] bool debugRay;
+    [SerializeField] bool debugLog;
     public bool reversing;
 
     void Start()
@@ -57,7 +58,7 @@ public class CpuController : MonoBehaviour
         {
             if(!reversing)
             {
-                Debug.Log("reversing to avoid obstacle");
+                if(debugLog) Debug.Log("reversing to avoid obstacle");
                 StartCoroutine(Reverse(reverseTimeForAvoiding));
             }
         }
@@ -65,13 +66,19 @@ public class CpuController : MonoBehaviour
         {
             layerMask = 1 << 6;
             layerMask = ~ layerMask; //not pickups layer
-            if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right,out hit, collisionAvoidDistance,layerMask))
+            if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right,out hit, collisionAvoidDistance,layerMask)) // avoid things to the right
             {
                 turn = -1;
             }
-            else if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right * -1,out hit, collisionAvoidDistance,layerMask))
+            else if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right * -1,out hit, collisionAvoidDistance,layerMask)) // avoid things to the left
             {
                 turn = 1;
+            }
+            else if(Physics.Raycast(rayCastPosition.position,rayCastPosition.right * -1,out hit, collisionAvoidDistance,layerMask)) // avoid things in front of us
+            {
+                deltaPos = hit.point - rayCastPosition.position;
+                angle = Vector3.SignedAngle(transform.forward,deltaPos,Vector3.up);
+                turn = angle < 0 ? 1 : -1;    // turn away from the hit point
             }
         }
 
@@ -80,7 +87,7 @@ public class CpuController : MonoBehaviour
             accel = -1;
             if(Time.time % 10 <1)
             {
-            Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
+            if(debugLog) Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
             }
         }
         turn *= accel; //if we're going backwards need to reverse the steering
@@ -88,13 +95,13 @@ public class CpuController : MonoBehaviour
         simpleCarController.SetInputDirection(new Vector2(turn,accel));
         if(Time.time % 10 <1)
         {
-        //Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
+        if(debugLog) Debug.Log($"dot={dot} angle={angle} accel = {accel} turn = {turn} hit {hit.collider?.gameObject?.name}");
         }
     }
 
     IEnumerator Reverse(float time)
     {
-        Debug.Log("Reversing");
+        if(debugLog) Debug.Log("Reversing");
         reversing = true;
         yield return new WaitForSeconds(time);
         reversing = false;
@@ -107,12 +114,12 @@ public class CpuController : MonoBehaviour
         {
             targetIndex++;
             if(targetIndex >=trackTargets.Count) targetIndex = 0;
-            Debug.Log("Target reached, matched. Next is " + trackTargets[targetIndex].gameObject.name);
+            if(debugLog) Debug.Log("Target reached, matched. Next is " + trackTargets[targetIndex].gameObject.name);
             
         }
         else
         {
-            Debug.Log($"Target reached, not matched {trackTargets[targetIndex].gameObject.name}!={location.gameObject.name}");
+            if(debugLog) Debug.Log($"Target reached, not matched {trackTargets[targetIndex].gameObject.name}!={location.gameObject.name}");
         }
     }
 }

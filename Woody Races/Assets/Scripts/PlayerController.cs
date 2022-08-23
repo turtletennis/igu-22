@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float steeringDeadZone = 0.25f;
     [SerializeField] float directionCheckDelay = 0.5f;
     SimpleCarController simpleCarController;
+    HudManager hudManager;
     float directionLastCheckedAt;
     float currentBearing;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         simpleCarController = GetComponent<SimpleCarController>();
         CheckpointManager checkpointManager = FindObjectOfType<CheckpointManager>();
         trackCentre = checkpointManager.transform.position;
+        hudManager = FindObjectOfType<HudManager>();
         UpdateBearing();
     }
 
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("Going the wrong way!");
         }
+        hudManager.goingWrongWay = diff < 0;
         currentBearing = newBearing;
         directionLastCheckedAt = Time.time;
     }
