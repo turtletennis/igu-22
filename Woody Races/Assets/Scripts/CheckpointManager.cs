@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointManager : MonoBehaviour
 {
@@ -84,14 +85,26 @@ public class CheckpointManager : MonoBehaviour
         {
             hudManager.UpdateLapText(racerLapNumbers[racerIndex],totalLaps,GetFinalPosition(racerIndex));
             //hudManager.UpdateLapText(racerLapNumbers[racerIndex],totalLaps);
+            if(racerLapNumbers[racerIndex] > totalLaps)
+            {
+                StartCoroutine(RestartLevel(5));
+            }
         }
+    }
+
+    private IEnumerator RestartLevel(float waitSeconds)
+    {
+        yield return new WaitForSeconds(waitSeconds);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     private int GetFinalPosition(int racerIndex)
     {
         Debug.Log(string.Join(",",finishers));
-        for(int pos=1; pos < finishers.Count; pos++)
+        for(int pos=0; pos < finishers.Count; pos++)
         {
+            Debug.Log($"{finishers[pos]}=={racerIndex} {finishers[pos]==racerIndex} return {pos}");
             if(finishers[pos]==racerIndex)  return pos;
         }
         return -1;
