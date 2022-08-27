@@ -12,12 +12,12 @@ public class Racer : MonoBehaviour
     int currentCheckpoint;
     public List<Renderer> bodyMeshes;
     
+    
     void Start()
     {
         checkpointManager = FindObjectOfType<CheckpointManager>();
         carController = GetComponent<SimpleCarController>();
         cpuController = GetComponent<CpuController>();
-        Debug.Log($"Racer start");
     }
 
     // Update is called once per frame

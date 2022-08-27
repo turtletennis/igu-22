@@ -14,6 +14,7 @@ public class SimpleCarController : MonoBehaviour {
     [SerializeField] float fuelDrainRate = 0.5f;
     [SerializeField] float minimumSpeedFactor = 0.05f;
     [SerializeField] bool isPlayer;
+    [SerializeField] EngineSoundManager engineSoundManager;
     public float fuelRemaining;
     HudManager hudManager;
     
@@ -40,7 +41,9 @@ public class SimpleCarController : MonoBehaviour {
                 motor = minimumSpeedFactor;
             }
         }
-        fuelRemaining -= Mathf.Abs(motor) * fuelDrainRate / maxMotorTorque;
+        float power = Mathf.Abs(motor)  / maxMotorTorque;
+        fuelRemaining -= power * fuelDrainRate;
+        engineSoundManager.SetAcceleration(power);
         UpdateHud();
         float steering = maxSteeringAngle * inputDirection.x;
             

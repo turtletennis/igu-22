@@ -37,6 +37,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 107736111997085909, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 679764604925212107, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
+      propertyPath: MaxDistance
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4948574152419084641, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
       propertyPath: fuelDrainRate
       value: 0.025
@@ -89,6 +97,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CPU
       objectReference: {fileID: 0}
+    - target: {fileID: 8202294498028199028, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4948574152419084644, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
@@ -120,4 +132,5 @@ MonoBehaviour:
   reverseTimeForAvoiding: 2
   rayCastPosition: {fileID: 6561274375991420781}
   debugRay: 1
+  debugLog: 0
   reversing: 0
