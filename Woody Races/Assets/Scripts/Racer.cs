@@ -10,6 +10,7 @@ public class Racer : MonoBehaviour
     CpuController cpuController;
     public int racerIndex;
     int currentCheckpoint;
+    public List<Renderer> bodyMeshes;
     
     void Start()
     {
@@ -23,6 +24,14 @@ public class Racer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetBodyMaterial(Material material)
+    {
+        foreach(var mesh in bodyMeshes)
+        {
+            mesh.material = material;
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

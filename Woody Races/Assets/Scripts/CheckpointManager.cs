@@ -9,6 +9,7 @@ public class CheckpointManager : MonoBehaviour
     public List<Checkpoint> checkpoints;
     [SerializeField] private int totalLaps;
     [SerializeField] private List<Racer> racers;
+    [SerializeField] private List<Material> racerMaterials;
     private int racerCount;
     private List<int> racerLapNumbers;
     private List<int> racerCheckpoints = new List<int>();
@@ -33,6 +34,7 @@ public class CheckpointManager : MonoBehaviour
         for(int i=0; i < racerCount; i++)
         {
             racers[i].racerIndex=i;
+            racers[i].SetBodyMaterial(racerMaterials[i]);
             racerLapNumbers.Add(0);
             racerCheckpoints.Add(CheckpointCount - 1);
         }
