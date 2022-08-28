@@ -26,7 +26,7 @@ public class EngineSoundManager : MonoBehaviour
             if(engineRev < 0)
             {
                 revNoise.Stop();
-                Debug.Log("Stopped rev noise");
+                //Debug.Log("Stopped rev noise");
             }
         }
     }
@@ -40,7 +40,7 @@ public class EngineSoundManager : MonoBehaviour
             if(!revNoise.isPlaying)
             {
                 revNoise.Play();
-                Debug.Log("Playing sound");
+                //Debug.Log("Playing sound");
             }
         }
         else if(magnitude <= float.Epsilon && revNoise.isPlaying)

@@ -60,6 +60,6 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         simpleCarController.SetInputDirection(value.Get<Vector2>());
-        //Debug.Log(inputDirection);
+        //Debug.Log(value.Get<Vector2>());
     }
 }

@@ -49,6 +49,10 @@ PrefabInstance:
       propertyPath: fuelDrainRate
       value: 0.025
       objectReference: {fileID: 0}
+    - target: {fileID: 4948574152419084641, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
+      propertyPath: maxMotorTorque
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4948574152419084642, guid: 335fa8f10f373be43b464955cb13dec9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -128,9 +132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackTargets: []
   targetIndex: 0
-  collisionAvoidDistance: 4
-  reverseTimeForAvoiding: 2
+  collisionAvoidDistance: 25
+  collisionAvoidHorizontalDistance: 10
+  reverseTimeForAvoiding: 3
+  turnAvoidAngle: 75
   rayCastPosition: {fileID: 6561274375991420781}
-  debugRay: 1
+  debugRay: 0
   debugLog: 0
   reversing: 0
