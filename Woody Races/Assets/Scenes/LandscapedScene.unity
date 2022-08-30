@@ -1729,7 +1729,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1498054829}
-  m_RootOrder: 13
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &666537466
 SphereCollider:
@@ -5128,6 +5128,7 @@ Transform:
   - {fileID: 1275919216}
   - {fileID: 90394350}
   - {fileID: 1803674646}
+  - {fileID: 666537465}
   - {fileID: 1476616430}
   - {fileID: 1822935881}
   - {fileID: 1637966058}
@@ -5136,7 +5137,6 @@ Transform:
   - {fileID: 42806301}
   - {fileID: 1457442081}
   - {fileID: 1752094560}
-  - {fileID: 666537465}
   - {fileID: 2069391809}
   - {fileID: 1463516483}
   - {fileID: 445164725}
@@ -6566,10 +6566,6 @@ PrefabInstance:
     - target: {fileID: 2234238913731153348, guid: e117f143e5d5563468711d400557e4f4, type: 3}
       propertyPath: m_Name
       value: wood pickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 2234238913731153348, guid: e117f143e5d5563468711d400557e4f4, type: 3}
-      propertyPath: m_TagString
-      value: cpuTarget
       objectReference: {fileID: 0}
     - target: {fileID: 2234238913731153354, guid: e117f143e5d5563468711d400557e4f4, type: 3}
       propertyPath: m_RootOrder
